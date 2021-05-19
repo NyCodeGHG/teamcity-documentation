@@ -60,7 +60,7 @@ In this case, you need to [update the secondary node](multinode-setup.md#Upgrade
 
 _Multinode setup doesn't have a proxy server._
 
-To set up a high-availability TeamCity installation, you need to [configure a reverse proxy](multinode-setup.md#Configuring+Reverse+HTTP+Proxy).
+To set up a high-availability TeamCity installation, you need to [configure a reverse proxy](multinode-setup.md#Proxy+Configuration).
 
 <anchor name="ServerHealth-WebSocketconnectionissues"/>
 

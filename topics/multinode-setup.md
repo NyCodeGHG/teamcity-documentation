@@ -7,7 +7,7 @@ As the main use case of a multinode setup is to achieve high availability (HA), 
 
 ## Main vs. secondary node
 
-A TeamCity cluster can have one _main node_ and multiple _secondary nodes_. The main node is the "preferred" one. By default, it receives all incoming HTTP requests. It also performs critical background tasks, such as starting builds. A secondary node mostly serves as a backup server, necessary for the failover. For better load distribution and performance optimization, it can also be granted with [additional responsibilities]().
+A TeamCity cluster can have one _main node_ and multiple _secondary nodes_. The main node is the "preferred" one. By default, it receives all incoming HTTP requests. It also performs critical background tasks, such as starting builds. A secondary node mostly serves as a backup server, necessary for the failover. For better load distribution and performance optimization, it can also be granted with [additional responsibilities](#Responsibilities).
 
 <img src="multinode-setup.png" width="702" alt="TeamCity setup with two nodes"/>
 
@@ -42,7 +42,7 @@ On the first start of the node, the local Data Directory is automatically create
 
 To reduce the load caused by extra IO requests from all nodes to the shared TeamCity Data Directory and to speed up the nodes\' access to data, we highly recommend redefining the location of the node-specific Data Directory to use the node\'s local disk.
 
-To define a new path to a local directory, use the `-Dteamcity.node.data.path` property in the TeamCity [start-up scripts](configuring-teamcity-server-startup-properties.md#Standard+TeamCity+Startup+Scripts). Read more [below]().
+To define a new path to a local directory, use the `-Dteamcity.node.data.path` property in the TeamCity [start-up scripts](configuring-teamcity-server-startup-properties.md#Standard+TeamCity+Startup+Scripts). Read more [below](#Installing+Secondary+Node).
 
 ## High-Availability Setup
 
@@ -63,13 +63,13 @@ The minimum number of server machines necessary for a high-availability setup is
 
 >All nodes that use the same data directory share the same license key. If you own a TeamCity Enterprise license, no additional purchases are required.
 >
-{type=”note”}
+{type="note"}
 
 ### Configuring HA Setup
 
 This sections relies on the following assumptions:
 * All the [prerequisites](#Prerequisites) are met.
-* [TeamCity is installed](installing-and-configuring-the-teamcity-server.md) on both nodes. (See how to [install a regular secondary node]().)
+* [TeamCity is installed](installing-and-configuring-the-teamcity-server.md) on both nodes. (See how to [install a regular secondary node](#Installing+Secondary+Node).)
 * [TeamCity Data Directory](teamcity-data-directory.md) and database are already initialized.
 
 Now, we can proceed with the transition from a single server setup to a high-availability cluster setup.
@@ -83,7 +83,7 @@ Used terms:
 
 >Paths like `<TeamCity Data Directory>` or `<Node-specific data directory>` can be different on each node. To keep the setup simple, we recommend that you keep them the same.
 >
-{type=”node”}
+{type="node"}
 
 To configure a TeamCity cluster consisting of two nodes, follow these steps:
 1. Check that the version of the TeamCity server installed on both nodes is the same and corresponds to the version of the Data Directory.
@@ -95,8 +95,8 @@ To configure a TeamCity cluster consisting of two nodes, follow these steps:
     >You can also specify a path to the shared TeamCity Data Directory via the TEAMCITY_DATA_PATH environment variable.  
     >Make sure the database is configured to accept enough parallel connections to handle requests from both nodes. By default, each node requires 50 connections to the database.
 4. Start both nodes using [regular TeamCity scripts](installing-and-configuring-the-teamcity-server.md#Starting+TeamCity+server) or via the TeamCity service.
-5. Open the TeamCity __Administration | Nodes Configuration__ page on any of the two servers and enable the “_[Main TeamCity node]()_” responsibility for a node you want to make main.
-6. Proceed with [configuring the reverse HTTP proxy]().
+5. Open the TeamCity __Administration | Nodes Configuration__ page on any of the two servers and enable the "_[Main TeamCity node](#Main+Node+Responsibility)_" responsibility for a node you want to make main.
+6. Proceed with [configuring the reverse HTTP proxy](#Proxy+Configuration).
 
 ## Proxy Configuration
 
@@ -254,11 +254,11 @@ server {
 
 ## Failover
 
-In the case of a failover, when the main node is no longer available either because of a crash or during maintenance, a secondary node can be granted with the “Main TeamCity node” responsibility and act as a main node temporarily or permanently.
+In the case of a failover, when the main node is no longer available either because of a crash or during maintenance, a secondary node can be granted with the "_Main TeamCity node_" responsibility and act as a main node temporarily or permanently.
 
-Each secondary node tracks the activity of the current main node and, if it is inactive for several minutes (3 by default), shows the corresponding health report. After you see this report, you can assign the "_Main TeamCity Node_" responsibility to another node. However, if this inactivity has not been planned (that is, the main node has crashed), it is important to verify that no TeamCity server processes are left running on the inactive node. If you detect such processes, you need to stop them before reassigning the “Main TeamCity node” responsibility.
+Each secondary node tracks the activity of the current main node and, if it is inactive for several minutes (3 by default), shows the corresponding health report. After you see this report, you can assign the "_Main TeamCity Node_" responsibility to another node. However, if this inactivity has not been planned (that is, the main node has crashed), it is important to verify that no TeamCity server processes are left running on the inactive node. If you detect such processes, you need to stop them before reassigning the "_Main TeamCity node_" responsibility.
 
-After switching the responsibility, you also need to update the IDs and hostnames of nodes in the [reverse proxy configuration](#Configuring+Reverse+HTTP+Proxy) and reload the proxy server configuration. Otherwise, if you decide to start the former main node again, the proxy won’t be able to properly route agents and users.
+After switching the responsibility, you also need to update the IDs and hostnames of nodes in the [reverse proxy configuration](#Proxy+Configuration) and reload the proxy server configuration. Otherwise, if you decide to start the former main node again, the proxy won’t be able to properly route agents and users.
 
 ### Installing Secondary Node
 
@@ -335,7 +335,7 @@ This responsibility is responsible for allowing [user actions on a secondary nod
 
 #### Main Node Responsibility
 
-You can assign a secondary node to the _Main TeamCity node_ responsibility. This responsibility by default belongs to the current main server, but gets vacant if this server becomes unavailable. After you assign any secondary server to this responsibility, it becomes the main node and receives all its other responsibilities (processing builds, managing agents, and so on). All the running builds will continue their operations without interruption. If a [proxy is configured](#Configuring+Reverse+HTTP+Proxy) in your setup, build agents will seamlessly reconnect to the new main node.  
+You can assign a secondary node to the _Main TeamCity node_ responsibility. This responsibility by default belongs to the current main server, but gets vacant if this server becomes unavailable. After you assign any secondary server to this responsibility, it becomes the main node and receives all its other responsibilities (processing builds, managing agents, and so on). All the running builds will continue their operations without interruption. If a [proxy is configured](#Proxy+Configuration) in your setup, build agents will seamlessly reconnect to the new main node.  
 When the previous main server starts again, it becomes a secondary node, as the _Main TeamCity node_ responsibility is already occupied by another server. If necessary, you can repeat the procedure above to switch roles between these servers.
 
 ### Internal Properties
@@ -364,7 +364,7 @@ A number of bundled plugins can be used on the main node only:
 
 >Secondary nodes can load an external/non-bundled plugin if this plugin supports secondary nodes. See the [Plugins F.A.Q.](https://plugins.jetbrains.com/docs/teamcity/plugin-development-faq.html#How+to+adapt+plugin+for+secondary+node) for details.
 >
-{type=”note”}
+{type="note"}
 
 ### Clean-up
 
@@ -413,7 +413,7 @@ The restore operation can be done on either of the nodes, but only if all server
 
 >Currently, the contents of the `<Node-specific data directory>` are not included in the backup.
 >
-{type=”note”}
+{type="note"}
 
 ## User-level Actions on Secondary Node
 
