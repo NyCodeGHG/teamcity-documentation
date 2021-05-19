@@ -104,18 +104,6 @@ The reverse HTTP proxy serves a single endpoint for TeamCity users and for [buil
 
 In case with TeamCity, the proxy server also acts as a load balancer for incoming requests. It can determine where the request should be sent and route it to the corresponding upstream server. In this article, we provide examples of the proxy configuration for two most popular proxy servers: NGINX and HAProxy.
 
-In the examples below, the following values should be replaced:
-* `{main_node_hostname}` — a hostname of the main node. If the UI of the main node operates on a port different from the proxy server port, this value should be specified in the form `hostname:port`.
-* `{secondary_node_hostname}` — a hostname of the secondary node.
-* `{main_node_id}` — the ID of the main node.
-* `{secondary_node_id}` — the ID of the secondary node.
-
-On a failover, if a former secondary node is assigned with the _Main TeamCity node_ responsibility, the configuration of the main and secondary nodes in the proxy config should be updated: `{main_node_hostname}` and `{main_node_id}` should be replaced with the hostname and ID of the new main node; `{secondary_node_hostname}` and `{secondary_node_id}` — with the hostname and ID of the former main node.
-
->Since all users will be using the URL of the proxy server for accessing the UI, this URL should be specified as a "Server URL" on the __Administration | Global Settings__ page.
-> 
-{type="note"}
-
 <tabs>
 
 <tab title="HAProxy">
@@ -250,7 +238,19 @@ server {
 </tab>
 </tabs>
 
->The HAProxy config sets a special header `X-TeamCity-Proxy`. It tells TeamCity that a request comes through a properly configured proxy. The header also defines a version of the proxy config: it helps ensure that the TeamCity server is compatible with the proxy configuration.
+In the examples above, the following values should be replaced:
+* `{main_node_hostname}` — a hostname of the main node. If the UI of the main node operates on a port different from the proxy server port, this value should be specified in the form `hostname:port`.
+* `{secondary_node_hostname}` — a hostname of the secondary node.
+* `{main_node_id}` — the ID of the main node.
+* `{secondary_node_id}` — the ID of the secondary node.
+
+On a failover, if a former secondary node is assigned with the _Main TeamCity node_ responsibility, the configuration of the main and secondary nodes in the proxy config should be updated: `{main_node_hostname}` and `{main_node_id}` should be replaced with the hostname and ID of the new main node; `{secondary_node_hostname}` and `{secondary_node_id}` — with the hostname and ID of the former main node.
+
+>Since all users will be using the URL of the proxy server for accessing the UI, this URL should be specified as a "Server URL" on the __Administration | Global Settings__ page.
+> 
+{type="note"}
+
+The HAProxy config sets a special header `X-TeamCity-Proxy`. It tells TeamCity that a request comes through a properly configured proxy. The header also defines a version of the proxy config: it helps ensure that the TeamCity server is compatible with the proxy configuration.
 
 ## Failover
 
@@ -297,8 +297,6 @@ By default, a newly started secondary node provides a read-only user interface a
 * [Processing build triggers](#Processing+Triggers+on+Secondary+Node)
 * [Processing user requests to modify data](#Processing+User+Requests+to+Modify+Data+on+Secondary+Node)
 * [Main TeamCity node](#Main+Node+Responsibility)
-
-<img src="Nodes.png" alt="Secondary node responsibilities"/>
 
 A node assigned to any responsibility will allow users to perform the [most common actions](#User-level+Actions+on+Secondary+Node) on builds.
 
