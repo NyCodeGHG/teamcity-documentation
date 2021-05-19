@@ -215,7 +215,7 @@ For this purpose, we've created a new [user permission](role-and-permission.md) 
 
 If you store build artifacts in Amazon S3, you can now control how they are uploaded. TeamCity uses a [multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html) of large files by default, but it is now possible to customize its parameters: upload threshold and upload part size. This can help use the network bandwidth more effectively and improve throughput.
 
-<img src="multipart_upload.png" width="495" alt="Multipart upload of large artifacts"/>
+<img src="multipart-upload.png" width="495" alt="Multipart upload of large artifacts"/>
 
 [Read this section](configuring-artifacts-storage.md#Multipart+Upload) for more details.
 
