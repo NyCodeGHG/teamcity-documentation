@@ -260,7 +260,7 @@ Each secondary node tracks the activity of the current main node and, if it is i
 
 After switching the responsibility, you also need to update the IDs and hostnames of nodes in the [reverse proxy configuration](#Proxy+Configuration) and reload the proxy server configuration. Otherwise, if you decide to start the former main node again, the proxy won’t be able to properly route agents and users.
 
-### Installing Secondary Node
+## Installing Secondary Node
 
 To install a secondary node, follow these steps on the secondary node machine:
 
