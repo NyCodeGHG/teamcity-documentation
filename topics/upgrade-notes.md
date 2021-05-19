@@ -3,7 +3,7 @@
 
 ## Changes from 2020.2.x to 2021.1
 
-### Deprecating Use Mirrors in favor of Checkout Policy
+### Git Use Mirrors is deprecated in favor of Checkout Policy
 
 [Git](git.md) VCS roots now receive the new _[Checkout Policy](git.md#git-checkout-policy)_ option that replaces the _Use Mirrors_ checkbox and provides more flexibility. On upgrading, the roots' settings will keep their selected states. However, Git roots' settings in [Kotlin DSL](kotlin-dsl.md) specifications need to be updated.
 
@@ -19,7 +19,7 @@ The default port in the TeamCity installer for Windows has been changed to 8111.
 
 ### OR as default operator for Lucene search
 
-TeamCity Lucene-based search now uses the `OR` operator by default instead of `AND`. This corresponds to the default Lucene syntax and helps optimize the search behavior and reduce its index size.
+TeamCity [Lucene-based search](search.md) now uses the `OR` operator by default instead of `AND`. This corresponds to the default Lucene syntax and helps optimize the search behavior and reduce its index size.
 
 ### PNG build status icon by default
 
@@ -31,7 +31,7 @@ The build status icon, available via the default `http://<TeamCity Server host>:
 * Bundled [Ant](ant.md) has been updated to version 1.10.10. Note that this version requires Java 8 or later.
 * Bundled dotCover and ReSharper CLT have been updated to version 2021.1.2.
 * Bundled JaCoCo has been updated to version 0.8.6.
-* The Bundled Kotlin compiler, used in TeamCity DSL, has been updated to version 1.4.32.
+* The Bundled Kotlin compiler, used in [TeamCity DSL](kotlin-dsl.md), has been updated to version 1.4.32.
 * Bundled Kotlin, used in the [Kotlin Script](kotlin-script.md) build runner, has been updated to version 1.5.0.
 * JDBC drivers for external databases have been updated to the following versions:
   * MySQL — 8.0.24

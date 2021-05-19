@@ -9,7 +9,7 @@ You can use it to automate recurring routines, such as custom checks, sending [s
 
 To configure a Kotlin Script build step, enter a script code or provide a path to it. By default, TeamCity will run it using Kotlin 1.5.0, but you can install any other compiler version in __Administration | Tools__.
 
-<img src="kotlin-script-step.png" width="645" alt="Kotlin Script build step"/>
+<img src="kotlin-script-step.png" alt="Kotlin Script build step"/>
 
 [Read this article](kotlin-script.md) for more details.
 
@@ -23,7 +23,7 @@ If there are [ESlint](https://eslint.org/), [Jest](https://jestjs.io/), [Mocha](
 
 To configure a Node.js build step, just enter a script with necessary Shell commands:
 
-<img src="nodejs-step.png" width="428" alt="Node.js build step"/>
+<img src="nodejs-step.png" alt="Node.js build step"/>
 
 Currently, all Node.js steps are run inside a Docker container, which means [Docker](https://www.docker.com/) needs to be installed on build agents. TeamCity uses the `node:lts` version by default; but if there is an `.nvmrc` file inside your project, it will search for the image specification there.
 
@@ -41,7 +41,7 @@ In a build trigger's settings, you can find the new __Build Customization__ tab 
 
 This feature gets even more effective if you combine it with our [build step execution conditions](build-step-execution-conditions.md). You just need to add a parameter-based condition to a step and then configure two triggers: one will run builds with this step (when the condition is satisfied) and one — without it. A popular use case is to run an extra clean-up step when a failed build is restarted with a [retry trigger](configuring-retry-build-trigger.md): this can help solve many build problems even without involving a user.
 
-<img src="custom-trigger-params.png" width="339" alt="Customize triggered builds"/>
+<img src="custom-trigger-params.png" alt="Customize triggered builds"/>
 
 ## Multinode setup improvements
 
@@ -53,7 +53,7 @@ Now, if the main node goes down for any reason, its main role and all the respec
 
 By default, the new "_Main TeamCity node_" responsibility belongs to the current main server, but it gets vacant if this server becomes unavailable. You can then assign it to any secondary server in __Administration | Nodes Configuration__.
 
-<img src="main-node-role.png" width="342" alt="Main node responsibility"/>
+<img src="main-node-role.png" alt="Main node responsibility"/>
 
 The assigned server becomes the main node and automatically receives all its other responsibilities (processing builds, managing agents, and so on). This new main node keeps all its running builds, and the agents reconnect to it automatically if a [proxy is configured in your setup](multinode-setup.md#Proxy+Configuration).
 
@@ -73,7 +73,7 @@ If a secondary node is assigned to processing builds, it is now possible to limi
 
 To configure the limits, go to __Administration | Nodes Configuration__, find the required node in the list, and click __Edit__ next to its "_Processing data produced by running builds_" responsibility. In the _Limit builds_ dialog, enter a relative limit of builds allowed to run on this node. We suggest that you set the limits depending on the nodes' hardware capabilities.
 
-<img src="node-build-limit.png" width="342" alt="Limit builds on node"/>
+<img src="node-build-limit.png" alt="Limit builds on node"/>
 
 If the maximum limit of allowed builds is reached on all secondary nodes, TeamCity will be starting new builds on the main node — until some secondary node finishes its build.
 
@@ -88,7 +88,7 @@ You can select the search mode on the Root project level in __Project Settings |
 
 After you save the new settings, TeamCity will spend some time reindexing builds. The exact duration depends on the size of your server. You can track or control the progress in the _Diagnostics_ table.
 
-<img src="elastic-search.PNG" width="655" alt="Elastic-based search"/>
+<img src="elastic-search.PNG" alt="Elastic-based search"/>
 
 ## Read-only project settings
 
@@ -100,7 +100,7 @@ To address these and any similar cases, we've added a new option: _Allow editing
 
 To toggle the new option, go to __Project Settings | Versioned Settings | Configuration__:
 
-<img src="versioned-settings-sync.png" width="357" alt="Read-only project settings"/>
+<img src="versioned-settings-sync.png" alt="Read-only project settings"/>
 
 [Read this article](storing-project-settings-in-version-control.md#Synchronizing+Settings+with+VCS) for more details.
 
@@ -112,7 +112,7 @@ By default, a token's _Permissions scope_ is set to "_Same as current user_". It
 
 If you change the scope to "_Limit per project_", you will be able to limit the token's access to a certain project and even select particular permissions for it. The list of available projects and permissions depend on your user role. Tokens with a limited scope can only be used for REST API requests.
 
-<img src="limit-access-token.png" width="323" alt="Access token with limited permissions"/>
+<img src="limit-access-token.png" alt="Access token with limited permissions"/>
 
 >Make sure to thoroughly configure the token's scope as some permissions might depend on another.
 
@@ -151,13 +151,13 @@ TeamCity allows using [Perforce streams as feature branches](perforce-streams-as
 
 To configure this, go to your project settings in TeamCity and, under __Connections__, add a new connection with the _Perforce Administrator Access_ type. Enter the host and user credentials for accessing the Perforce server (the user must have the [admin permission](https://www.perforce.com/manuals/p4sag/Content/P4SAG/protections.set.html#protections.set.access_levels)), and TeamCity will connect to it.
 
-<img src="p4-admin-connect.png" width="292" alt="Perforce Administrator Access connection"/>
+<img src="p4-admin-connect.png" alt="Perforce Administrator Access connection"/>
 
 During every [clean-up](clean-up.md), TeamCity will detect and delete workspaces that have been inactive for more than 7 days. Or, you can delete them anytime by clicking Delete these workspaces in the connection settings. Note that workspaces are deleted only on the server — not on build agents — and only if they were created by TeamCity.
 
 If the support for feature branches is enabled in a Perforce root, it is also possible to delete workspaces associated with any stream available to this root. Go to __Build Configuration Home__, open the __Actions__ menu, and click __Delete Perforce stream workspaces__. By default, this action is available to all users with the Project Developer role. In this menu, you can specify a path to a stream, and TeamCity will delete the related workspaces on the Perforce server.
 
-<img src="delete-stream-ws.png" width="206" alt="Delete Perforce stream workspaces"/>
+<img src="delete-stream-ws.png" alt="Delete Perforce stream workspaces"/>
 
 ## Onboarding UI assistant
 
@@ -167,7 +167,7 @@ To enable it, open the __Help__ menu in the upper right corner of the screen and
 
 To see a hint for a certain element, hover over its name in the assistant menu. Some hint names also provide a ![link-to-doc.png](link-to-doc.png) link to the related documentation.
 
-<img src="show-hints.png" width="258" alt="Onboarding UI assistant"/>
+<img src="show-hints.png" alt="Onboarding UI assistant"/>
 
 Hints are available for [experimental](teamcity-experimental-ui.md) __Project Home__, __Build Configuration Home__, and __Build Overview__, as well as for some of the __Settings__ pages.
 
@@ -185,7 +185,7 @@ Test results are often the most important information you seek when opening the 
 
 In the _Tests_ block, click __Show grouped tests__, and TeamCity will represent them in a tree mode, grouped together by _project → build configuration → test suite → test package → test class_. You can switch between the tree and flat structure anytime, depending on your current tasks.
 
-<img src="test-tree-mode.png" width="800" alt="Tree mode for tests"/>
+<img src="test-tree-mode.png" alt="Tree mode for tests"/>
 
 As tests within the same group have a similar purpose, you might want to quickly select them all or temporarily collapse them to focus on other groups. The tree mode works great for that, and it is especially helpful if there are many tests in your build configuration. When a group is selected, you can apply actions like __Investigate__ or __Mute__ to all its tests at once.
 
@@ -197,13 +197,13 @@ TeamCity can provide code coverage for [multiple build runners](code-coverage.md
 
 If coverage is available for a build configuration, you can quickly preview a visualized statistics of the build's tests and see how it changed compared to the previous build:
 
-<img src="code-coverage-preview.png" width="999" alt="Code coverage preview"/>
+<img src="code-coverage-preview.png" alt="Code coverage preview"/>
 
 ## Refined Project Home
 
 After gathering your feedback on the experimental __Project Home__ page, we focused on two tasks: use the space on this page more effectively and make a project tree easier to navigate. We hope that the refined page will serve you as a handy dashboard for previewing and running all builds of the same project:
 
-<img src="project-home.png" width="744" alt="Refined Project Home"/>
+<img src="project-home.png" alt="Refined Project Home"/>
 
 ## Restrict to customize builds with personal patches
 
@@ -215,7 +215,7 @@ For this purpose, we've created a new [user permission](role-and-permission.md) 
 
 If you store build artifacts in Amazon S3, you can now control how they are uploaded. TeamCity uses a [multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html) of large files by default, but it is now possible to customize its parameters: upload threshold and upload part size. This can help use the network bandwidth more effectively and improve throughput.
 
-<img src="multipart-upload.png" width="495" alt="Multipart upload of large artifacts"/>
+<img src="multipart-upload.png" alt="Multipart upload of large artifacts"/>
 
 [Read this section](configuring-artifacts-storage.md#Multipart+Upload) for more details.
 
@@ -242,11 +242,11 @@ TeamCity allows viewing a thread dump of processes running on a build agent mach
 
 While the build is running, click __View thread dump__ in its __Overview__.
 
-<img src="thread-dump.png" width="394" alt="View thread dump"/>
+<img src="thread-dump.png" alt="View thread dump"/>
 
 TeamCity will show the structured information about the agent processes:
 
-<img src="thread-dump-docker.png" width="419" alt="Thread dump of a Docker process"/>
+<img src="thread-dump-docker.png" alt="Thread dump of a Docker process"/>
 
 ## Quick access to build status widget
 
@@ -258,11 +258,11 @@ Our [build status widget](configuring-general-settings.md#Enable+Status+Widget) 
 
 To access the widget menu from __Build Configuration Home__, open the __Actions__ menu and click __Get build status icon__:
 
-<img src="status-icon.png" width="179" alt="Get build status icon"/>
+<img src="status-icon.png" alt="Get build status icon"/>
 
 The _Status Image_ menu shows the icon preview and allows copying its code in one of the supported formats:
 
-<img src="status-widget.png" width="232" alt="Build status widget"/>
+<img src="status-widget.png" alt="Build status widget"/>
 
 You can embed this code into an external page and view the build status without opening TeamCity.
 
