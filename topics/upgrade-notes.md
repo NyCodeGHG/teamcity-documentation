@@ -25,6 +25,10 @@ TeamCity [Lucene-based search](search.md) now uses the `OR` operator by default 
 
 The build status icon, available via the default `http://<TeamCity Server host>:<port>/app/rest/builds/<buildLocator>/statusIcon` [REST API endpoint](https://www.jetbrains.com/help/teamcity/rest/get-build-status-icon.html), is now provided in the SVG format instead of PNG. The `statusIcon.svg` endpoint is still supported for compatibility with existing scripts.
 
+### Unbundled old versions of REST API
+
+The following old versions of [REST API](https://www.jetbrains.com/help/teamcity/rest/teamcity-rest-api-documentation.html) have been unbundled: 6.0, 7.0, 8.1, 9.0, 9.1. If this change causes any problems for your setup, please contact us via any [feedback channel](feedback.md).
+
 ### Bundled tools updates
 
 * Bundled Amazon Corretto Java has been updated to version 11.0.11.9.1 in the TeamCity server Docker images and Windows installers.
@@ -33,10 +37,6 @@ The build status icon, available via the default `http://<TeamCity Server host>:
 * Bundled JaCoCo has been updated to version 0.8.6.
 * The Bundled Kotlin compiler, used in [TeamCity DSL](kotlin-dsl.md), has been updated to version 1.4.32.
 * Bundled Kotlin, used in the [Kotlin Script](kotlin-script.md) build runner, has been updated to version 1.5.0.
-* JDBC drivers for external databases have been updated to the following versions:
-  * MySQL — 8.0.24
-  * MSSQL — 9.2.1
-  * PostgreSQL — 42.2.20
 * The bundled ReSharper and dotCover tools have been updated to version 2021.1.1.
 * JGit version, used in the [Git](git.md) plugin, has been updated to 5.10.0.202012080955-r.
 * SVNKit, used in [Subversion](subversion.md) VCS roots, has been updated to version 1.10.3.
