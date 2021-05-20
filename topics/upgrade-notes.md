@@ -29,7 +29,8 @@ The build status icon, available via the default `http://<TeamCity Server host>:
 
 The following old versions of [REST API](https://www.jetbrains.com/help/teamcity/rest/teamcity-rest-api-documentation.html) have been unbundled: 6.0, 7.0, 8.1, 9.0, 9.1. If this change causes any problems for your setup, please contact us via any [feedback channel](feedback.md).
 
-### Bundled tools updates
+### Bundled Tools Updates
+{id="bundled-tools-updates-20211"}
 
 * Bundled Amazon Corretto Java has been updated to version 11.0.11.9.1 in the TeamCity server Docker images and Windows installers.
 * Bundled [Ant](ant.md) has been updated to version 1.10.10. Note that this version requires Java 8 or later.
@@ -40,6 +41,11 @@ The following old versions of [REST API](https://www.jetbrains.com/help/teamcity
 * The bundled ReSharper and dotCover tools have been updated to version 2021.1.1.
 * JGit version, used in the [Git](git.md) plugin, has been updated to 5.10.0.202012080955-r.
 * SVNKit, used in [Subversion](subversion.md) VCS roots, has been updated to version 1.10.3.
+
+### Other Updates
+{id="other-updates-20211"}
+
+* The __My Settings & Tools__ page has been renamed to __Your Profile__.
 
 ## Changes from 2020.2.3 to 2020.2.4
 
