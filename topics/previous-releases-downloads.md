@@ -20,7 +20,7 @@ Build 92597
 
 [Release notes](teamcity-2021-1-release-notes.md)
 
-## TeamCity 2020.2.3
+## TeamCity 2020.2.4
 
 Release date: 15 April 2021    
 Build 86063
