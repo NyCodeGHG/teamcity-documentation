@@ -18,7 +18,7 @@ The runner's requirements:
 * The [TeamCity.csi](https://www.nuget.org/packages/TeamCity.csi/) package must be [installed as an agent tool](installing-agent-tools.md).
 
 >__Use TeamCity.csi outside TeamCity__   
->You can use our custom tool to run tasks in C# from the command line, similarly to a regular C# Interactive tool. TeamCity.csi can be run on Windows, Linux, and macOS. See its [README](https://github.com/JetBrains/teamcity-csharp-interactive) for more details.
+>You can use our custom tool to run tasks in C# from the command line, similarly to using a regular C# Interactive tool. TeamCity.csi can be run on Windows, Linux, and macOS. See its [README](https://github.com/JetBrains/teamcity-csharp-interactive) for more details.
 
 ## C# Script Settings
 
@@ -86,11 +86,6 @@ _Available for the __Custom Script__ type._
 
 Enter a code of a C# script.
 
-<anchor name="call-args"/>
-Inside the script, you can call:
-* __arguments__ provided in the _Script parameters_ field below as the `Args` array (for example, `WriteLine(Args[0])` to write the value of the first script parameter);
-* __system parameters__ specified in __Build Configuration Settings | Parameters__ as the `Props` dictionary (for example, `WriteLine(Props["version"])` to write the value of the `system.version` parameter).
-
 </td>
 
 </tr>
@@ -109,8 +104,6 @@ _Available for the __Script File__ type._
 
 Enter a path to the script file, relative to the [build checkout directory](build-checkout-directory.md).
 
-You can use script arguments and system parameters inside the file's code, as specified [here](#call-args).
-
 </td>
 
 </tr>
@@ -125,7 +118,7 @@ Script parameters
 
 <td>
 
-Enter parameters of the script. Parameters are passed as the `Args` array. View [supported arguments](#Supported+Commands+and+Arguments).
+Enter parameters of the script. Parameters are passed as the `Args` array. View [supported arguments](#Commands+and+Arguments+Supported+in+Scripts).
 
 [Parameter references](configuring-build-parameters.md#parameter-reference) are supported.
 
@@ -163,9 +156,9 @@ By default, TeamCity restores NuGet packages from their sources published on [Nu
 
 </table>
 
-## Supported Commands
+## Commands and Arguments Supported in Scripts
 
-The following commands are supported inside a script:
+Supported commands:
 
 <table>
 
@@ -236,3 +229,8 @@ Set a verbosity level to `quiet`, `normal`, or `trace`.
 </tr>
 
 </table>
+
+<anchor name="call-args"/>
+Supported arguments:
+* __arguments__ provided in the _Script parameters_ field and stored in the `Args` array (for example, `WriteLine(Args[0])` to write the value of the first script parameter);
+* __system parameters__ specified in __Build Configuration Settings | Parameters__ and stored in the `Props` dictionary (for example, `WriteLine(Props["version"])` to write the value of the `system.version` parameter).
