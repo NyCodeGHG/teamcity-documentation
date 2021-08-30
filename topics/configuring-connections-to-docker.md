@@ -2,7 +2,7 @@
 [//]: # (auxiliary-id: Configuring Connections to Docker)
 
 A preconfigured Docker connection allows you to:
-* log in to an authenticated registry before running a build / log out after the build;
+* sign in to an authenticated registry before running a build / sign out after the build;
 * clean up the published images after the build.
 
 >This type of connection is a part of the TeamCity-Docker integration toolset. Refer to [this page](integrating-teamcity-with-docker.md) for information on software requirements, supported environments, and other common aspects of this integration.
