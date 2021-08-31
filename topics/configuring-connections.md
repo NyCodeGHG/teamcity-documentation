@@ -7,6 +7,13 @@ To add a connection, go the project's settings and open the __Connections__ page
 
 When created, a connection can be used in all the nested subprojects of the current project. If you add a connection in the Root project, it will become available on the whole server.
 
+## Amazon ECR
+
+A connection to Amazon Elastic Container Registry (ECR) allows accessing Docker images located in private AWS registries.
+
+The connection requires the following settings:
+* 
+
 ## Azure DevOps
 
 A connection to Azure DevOps Services (or formerly Team Foundation Server) can be used to:
